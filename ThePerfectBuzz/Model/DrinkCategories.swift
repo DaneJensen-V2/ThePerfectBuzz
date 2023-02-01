@@ -14,8 +14,12 @@ struct DrinkCategory {
     var image : UIImage
     var averageProof : Int
     var color : UIColor
-    
-    
-    
-    
+    var drinkSelectionInfo : DrinkSelectionInfo
+}
+
+struct DrinkSelectionInfo {
+    var alcoholPercentages : [Int]
+    var sizes : [Double]
+    var sampleImages : [UIImage]
+    var drinkNames : [String]
 }

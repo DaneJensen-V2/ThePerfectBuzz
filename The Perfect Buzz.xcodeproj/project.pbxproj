@@ -34,6 +34,11 @@
 		A5C10CAF2981F95800D0488C /* Poppins-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A5C10C9C2981F95800D0488C /* Poppins-ExtraBoldItalic.ttf */; };
 		A5C10CB12982175F00D0488C /* DrinkCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C10CB02982175F00D0488C /* DrinkCategories.swift */; };
 		A5C10CB3298222D100D0488C /* DrinkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C10CB2298222D000D0488C /* DrinkCollectionViewCell.swift */; };
+		A5C10CB529831EC900D0488C /* DrinkFocusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C10CB429831EC900D0488C /* DrinkFocusViewController.swift */; };
+		A5C10CB729837F0700D0488C /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C10CB629837F0700D0488C /* UserData.swift */; };
+		A5C10CBA2984D1F100D0488C /* UserData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5C10CB82984D1F100D0488C /* UserData.xcdatamodeld */; };
+		A5C10CBC2984D95700D0488C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C10CBB2984D95700D0488C /* CoreDataStack.swift */; };
+		A5C10CBE2984DA5100D0488C /* UserTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C10CBD2984DA5100D0488C /* UserTransformer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +71,11 @@
 		A5C10C9C2981F95800D0488C /* Poppins-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		A5C10CB02982175F00D0488C /* DrinkCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkCategories.swift; sourceTree = "<group>"; };
 		A5C10CB2298222D000D0488C /* DrinkCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkCollectionViewCell.swift; sourceTree = "<group>"; };
+		A5C10CB429831EC900D0488C /* DrinkFocusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkFocusViewController.swift; sourceTree = "<group>"; };
+		A5C10CB629837F0700D0488C /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		A5C10CB92984D1F100D0488C /* UserData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserData.xcdatamodel; sourceTree = "<group>"; };
+		A5C10CBB2984D95700D0488C /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		A5C10CBD2984DA5100D0488C /* UserTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTransformer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,12 +114,16 @@
 				A5C10C862980789000D0488C /* Model */,
 				A5C10C722980784300D0488C /* AppDelegate.swift */,
 				A5C10C742980784300D0488C /* SceneDelegate.swift */,
+				A5C10CBD2984DA5100D0488C /* UserTransformer.swift */,
 				A5C10C762980784300D0488C /* HomePageVC.swift */,
+				A5C10CBB2984D95700D0488C /* CoreDataStack.swift */,
 				A5C10CB2298222D000D0488C /* DrinkCollectionViewCell.swift */,
 				A5C10C782980784300D0488C /* Main.storyboard */,
+				A5C10CB429831EC900D0488C /* DrinkFocusViewController.swift */,
 				A5C10C7B2980784400D0488C /* Assets.xcassets */,
 				A5C10C7D2980784400D0488C /* LaunchScreen.storyboard */,
 				A5C10C802980784400D0488C /* Info.plist */,
+				A5C10CB82984D1F100D0488C /* UserData.xcdatamodeld */,
 			);
 			path = ThePerfectBuzz;
 			sourceTree = "<group>";
@@ -118,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				A5C10CB02982175F00D0488C /* DrinkCategories.swift */,
+				A5C10CB629837F0700D0488C /* UserData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -254,8 +269,13 @@
 			files = (
 				A5C10CB3298222D100D0488C /* DrinkCollectionViewCell.swift in Sources */,
 				A5C10C772980784300D0488C /* HomePageVC.swift in Sources */,
+				A5C10CBE2984DA5100D0488C /* UserTransformer.swift in Sources */,
+				A5C10CB729837F0700D0488C /* UserData.swift in Sources */,
+				A5C10CBC2984D95700D0488C /* CoreDataStack.swift in Sources */,
 				A5C10C732980784300D0488C /* AppDelegate.swift in Sources */,
 				A5C10CB12982175F00D0488C /* DrinkCategories.swift in Sources */,
+				A5C10CB529831EC900D0488C /* DrinkFocusViewController.swift in Sources */,
+				A5C10CBA2984D1F100D0488C /* UserData.xcdatamodeld in Sources */,
 				A5C10C752980784300D0488C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -476,6 +496,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A5C10CB82984D1F100D0488C /* UserData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A5C10CB92984D1F100D0488C /* UserData.xcdatamodel */,
+			);
+			currentVersion = A5C10CB92984D1F100D0488C /* UserData.xcdatamodel */;
+			path = UserData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A5C10C672980784300D0488C /* Project object */;
 }
