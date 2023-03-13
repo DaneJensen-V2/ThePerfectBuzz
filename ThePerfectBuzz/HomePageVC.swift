@@ -15,6 +15,9 @@ class HomePageVC : UIViewController {
     @IBOutlet weak var topBGView: UIView!
     @IBOutlet weak var orangeProgress: UIView!
     
+    @IBOutlet weak var currentDrinksTable: UITableView!
+    @IBOutlet weak var currentDrinksView: UIView!
+    @IBOutlet weak var viewHeight: NSLayoutConstraint!
     @IBOutlet weak var pointerPosition: NSLayoutConstraint!
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var BACLabel: UILabel!
@@ -22,13 +25,14 @@ class HomePageVC : UIViewController {
     @IBOutlet weak var pointerView: UIView!
     @IBOutlet weak var redProgress: UIView!
     
+    
     let appDelegate = UIApplication.shared.delegate as! AppDelegate //Singlton instance
     var context:NSManagedObjectContext!
     
     let Wine = DrinkCategory(name: "Wine", image: UIImage(named: "Wine")!, averageProof: 15, color: UIColor(named: "WineRed") ?? .red, drinkSelectionInfo: DrinkSelectionInfo(alcoholPercentages: [10,12,15], sizes: [5, 10, 25], sampleImages: [UIImage(named: "WineSmall")!, UIImage(named: "WineMedium")!, UIImage(named: "WineLarge")!], drinkNames: ["Glass", "2 Glasses", "Bottle"]))
     
     
-    let Beer = DrinkCategory(name: "Beer", image: UIImage(named: "Beer")!, averageProof: 5, color: UIColor(named: "BeerYellow") ?? .yellow, drinkSelectionInfo: DrinkSelectionInfo(alcoholPercentages: [5, 6, 7], sizes: [12, 16, 33], sampleImages: [UIImage(named: "BeerSmall")!, UIImage(named: "BeerMedium")!, UIImage(named: "BeerLarge")!], drinkNames: ["Can", "Tallboy", "Mug"]))
+    let Beer = DrinkCategory(name: "Beer", image: UIImage(named: "Beer")!, averageProof: 5, color: UIColor(named: "BeerYellow") ?? .yellow, drinkSelectionInfo: DrinkSelectionInfo(alcoholPercentages: [5, 6, 7], sizes: [12, 16, 33], sampleImages: [UIImage(named: "BeerSmall")!, UIImage(named: "BeerMedium")!, UIImage(named: "BeerLarge")!], drinkNames: ["Can", "Pint", "Liter"]))
     
     let Liquor = DrinkCategory(name: "Liquor", image: UIImage(named: "Liquor")!, averageProof: 20, color: UIColor(named: "LiquorBlue") ?? .blue, drinkSelectionInfo: DrinkSelectionInfo(alcoholPercentages: [30, 35, 40], sizes: [1.5,3, 4.5], sampleImages: [UIImage(named: "ShotSmall")!, UIImage(named: "ShotMedium")!, UIImage(named: "ShotLarge")!], drinkNames: ["Glass", "2 Glasses", "Bottle"]))
     
@@ -40,12 +44,20 @@ class HomePageVC : UIViewController {
     
     var DrinkCategories : [DrinkCategory] = []
     
-    let BeerToDrink = Drink(timeConsumed: Date() - (3600 * 3), percent: 0.045, volume: Measurement(value: 12, unit: UnitVolume.fluidOunces))
+    //let BeerToDrink = Drink(timeConsumed: Date() - (3600 * 3), percent: 0.045, volume: Measurement(value: 12, unit: UnitVolume.fluidOunces), name: "Test")
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let UIUpdateTimer = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: true) { timer in
+            self.updateUI()
+            currentUser.BAC = self.calculateBAC()
+            print("Updating UI...")
+        }
+        
+        viewHeight.constant = 1500
+    
         NotificationCenter.default.addObserver(self, selector: #selector(handleMyNotification(_:)), name: .kMyNotification, object: nil)
         
         DrinkCategories = [Liquor, Beer, Wine, Seltzer, Champagne, Custom]
@@ -55,10 +67,15 @@ class HomePageVC : UIViewController {
         
         setupBackgroundViews(viewtoChange: topBGView)
         setupBackgroundViews(viewtoChange: addDrinkBGView)
+        setupBackgroundViews(viewtoChange: currentDrinksView)
         
         orangeProgress.roundCorners([.topLeft, .bottomLeft], radius: 10)
         redProgress.roundCorners([.topRight, .bottomRight], radius: 10)
         
+        currentDrinksTable.delegate = self
+        currentDrinksTable.dataSource = self
+        
+        currentDrinksTable.register(UINib(nibName: "DrinkTableViewCell", bundle: nil), forCellReuseIdentifier: "DrinkCell")
         
         currentUser.BAC = calculateBAC()
 
@@ -122,7 +139,7 @@ class HomePageVC : UIViewController {
         case 0.03...0.06 :
             label = "Mild Euphoria/Impairment"
         case 0.06...0.10:
-            label = "Buzzed, Euphoric"
+            label = "Perfectly Buzzed"
         case 0.1...0.2:
             label = "Drunk, Slurred speech"
         case 0.2...0.3:
@@ -131,6 +148,11 @@ class HomePageVC : UIViewController {
             label = ""
         }
         infoLabel.text = label
+        
+        DispatchQueue.main.async {
+            self.currentDrinksTable.reloadData()
+
+        }
         
         playAnimation()
     }
@@ -157,6 +179,7 @@ class HomePageVC : UIViewController {
                 alcLevel = drink.alcLevel!
             }
             if (alcLevel < 0) {
+                print("Removing Drink")
                 currentUser.currentDrinks?.remove(at: index)
                 index = index - 1
             }
@@ -165,10 +188,14 @@ class HomePageVC : UIViewController {
                 totalBAC += alcLevel
             }
             index += 1
+            
+            /*
             print(drink)
             print("Interval: \(intervalInHours)")
             print("Alc Level: \(alcLevel)")
             print("BAC: \(totalBAC)")
+            */
+            
             
         }
         
@@ -211,6 +238,7 @@ extension HomePageVC : UICollectionViewDataSource, UICollectionViewDelegate {
         
         return cell
     }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         print(DrinkCategories[indexPath.row].name)
@@ -237,4 +265,46 @@ extension UserDefaults {
     }
     return try? JSONDecoder().decode(T.self, from: userDefaultData)
   }
+}
+extension HomePageVC : UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        
+        return currentUser.currentDrinks?.count ?? 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "DrinkCell", for: indexPath) as? DrinkTableViewCell else { return UITableViewCell() }
+        
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "h:mm a"
+        
+        if let drink = currentUser.currentDrinks?[indexPath.row] {
+            cell.drinkName.text = drink.name
+            cell.drinkTime.text = (dateFormatterGet.string(from: drink.timeStarted))
+            cell.drinkImage.image = UIImage(named: drink.name)
+            cell.drinkPercent.text = String(drink.percent * 100) + "%"
+        }
+        
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            currentUser.currentDrinks?.remove(at: indexPath.row)
+            NotificationCenter.default.post(name: .kMyNotification, object: nil)
+
+            
+        }
+    }
+
+    
 }

@@ -18,7 +18,7 @@ struct DrinkCategory {
 }
 
 struct DrinkSelectionInfo {
-    var alcoholPercentages : [Int]
+    var alcoholPercentages : [Double]
     var sizes : [Double]
     var sampleImages : [UIImage]
     var drinkNames : [String]

@@ -14,6 +14,9 @@ class DrinkFocusViewController: UIViewController {
     @IBOutlet weak var addDrinkButton: UIButton!
     @IBOutlet weak var alcoholContentSegment: UISegmentedControl!
 
+    @IBOutlet weak var amountLabel3: UILabel!
+    @IBOutlet weak var amountLabel2: UILabel!
+    @IBOutlet weak var amountLabel1: UILabel!
     @IBOutlet weak var startedDrinkingBG: UIView!
     @IBOutlet weak var amountSegment: UISegmentedControl!
     @IBOutlet weak var alcoholContentView: UIView!
@@ -24,6 +27,10 @@ class DrinkFocusViewController: UIViewController {
     
     var textFieldPosition = 0
     var amount = 0.0
+    var percent = 0.0
+    
+    let generator = UIImpactFeedbackGenerator(style: .light)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,7 +49,9 @@ class DrinkFocusViewController: UIViewController {
         addDrinkButton.layer.cornerRadius = 10
         self.hideKeyboardWhenTappedAround()
 
+        
         setAmountSegment()
+        setPercentSegment()
         
         timePickerView.maximumDate = Date()
         
@@ -57,8 +66,13 @@ class DrinkFocusViewController: UIViewController {
     }
     
     func setAmountSegment(){
+        let labels = selectedDrink.drinkSelectionInfo.drinkNames
+        amountLabel1.text = labels[0]
+        amountLabel2.text = labels[1]
+        amountLabel3.text = labels[2]
+
         amount = selectedDrink.drinkSelectionInfo.sizes[0]
-        amountTextField.text = String(amount) + "oz"
+        amountTextField.text = String(Int(amount)) + "oz"
 
         let images = selectedDrink.drinkSelectionInfo.sampleImages
         
@@ -71,24 +85,43 @@ class DrinkFocusViewController: UIViewController {
     @IBAction func amountSegment(_ sender: UISegmentedControl) {
         
         let amounts = selectedDrink.drinkSelectionInfo.sizes
-        
+    
         amount = amounts[amountSegment.selectedSegmentIndex]
       
-        amountTextField.text = String(amount) + "oz"
+        amountTextField.text = String(Int(amount)) + "oz"
+        
+        generator.impactOccurred()
+
     }
     
-    @IBAction func editingStartAmount(_ sender: Any) {
+    func setPercentSegment(){
+        let percentages = selectedDrink.drinkSelectionInfo.alcoholPercentages
 
-        DispatchQueue.main.async { [self] in
-            let arbitraryValue: Int = amountTextField.text!.count - 2
-            print(arbitraryValue)
-            if let newPosition = amountTextField.position(from: amountTextField.beginningOfDocument, offset: arbitraryValue) {
-                
-                amountTextField.selectedTextRange = amountTextField.textRange(from: newPosition, to: newPosition)
-            }
+        percent = percentages[0]
+        alcoholContentTF.text = String(percent) + "%"
+
+        
+        for x in 0...2 {
+            alcoholContentSegment.setTitle(String(Int(percentages[x])) + "%", forSegmentAt: x)
         }
+    }
+    
+  
+    @IBAction func alcPercentChanged(_ sender: UISegmentedControl) {
+        let percents = selectedDrink.drinkSelectionInfo.alcoholPercentages
+
+        percent = percents[alcoholContentSegment.selectedSegmentIndex]
+      
+
+        alcoholContentTF.text = String(percent) + "%"
+        generator.impactOccurred()
 
     }
+   
+ 
+   
+    
+
     
     @objc func keyboardWillShow(sender: NSNotification) {
         self.view.frame.origin.y = -200
@@ -100,27 +133,28 @@ class DrinkFocusViewController: UIViewController {
         
     }
     
-    @IBAction func percentEditBegin(_ sender: UITextField) {
-        let arbitraryValue: Int = 0
-        if let newPosition = alcoholContentTF.position(from: alcoholContentTF.beginningOfDocument, offset: arbitraryValue) {
-
-            alcoholContentTF.selectedTextRange = alcoholContentTF.textRange(from: newPosition, to: newPosition)
-        }
-        alcoholContentTF.text = "%"
+    @IBAction func amountEditBegin(_ sender: UITextField) {
+        print("BEGIN Amount")
+        sender.text = ""
     }
-    @IBAction func percentChanged(_ sender: UITextField) {
-        if let amountString = alcoholContentTF.text?.percentFormatter() {
+    @IBAction func amountEditEnd(_ sender: UITextField) {
+        amountTextField.text = amountTextField.text?.currencyInputFormatting()
+    }
+    
+    
+    @IBAction func percentBeginEditing(_ sender: UITextField) {
+        print("BEGIN")
+        sender.text = ""
+    }
+    @IBAction func alcPercentEnded(_ sender: Any) {
+       print("ended")
+        
+        alcoholContentTF.text = alcoholContentTF.text?.percentFormatter()
             
-            alcoholContentTF.text = amountString
-            let arbitraryValue: Int = amountString.count - 1
             
-            if let newPosition = amountTextField.position(from: amountTextField.beginningOfDocument, offset: arbitraryValue) {
-
-                amountTextField.selectedTextRange = amountTextField.textRange(from: newPosition, to: newPosition)
-            }
-            
-            }
-        }
+    }
+    
+    
     
     @IBAction func closeClicked(_ sender: UIButton) {
         self.dismiss(animated: true)
@@ -130,31 +164,34 @@ class DrinkFocusViewController: UIViewController {
 
     }
 
-    @IBAction func amountChanged(_ sender: UITextField) {
+    func tooManyDrinks() {
+        let alert = UIAlertController(title: "Too Many Drinks", message: "You can input a max of 20 drinks at a time.", preferredStyle: .alert)
         
-        if let amountString = amountTextField.text?.currencyInputFormatting() {
-           
-            amountTextField.text = amountString
-            let arbitraryValue: Int = amountString.count - 2
-            
-            if let newPosition = amountTextField.position(from: amountTextField.beginningOfDocument, offset: arbitraryValue) {
-
-                amountTextField.selectedTextRange = amountTextField.textRange(from: newPosition, to: newPosition)
-            }
-            
-            }
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            print("Too many drinks")
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func addDrinkClicked(_ sender: UIButton) {
-        let amount = Double((amountTextField.text?.extractNumber())!)
-        let percent = Double((alcoholContentTF.text?.extractNumber())!) / 100
         
-        let newDrink = Drink(timeConsumed: timePickerView.date, percent:percent, volume: Measurement(value: amount, unit: UnitVolume.fluidOunces))
+        if currentUser.currentDrinks!.count >= 5 {
+            tooManyDrinks()
+        }
         
-        currentUser.currentDrinks?.append(newDrink)
-        NotificationCenter.default.post(name: .kMyNotification, object: nil)
-
-        self.dismiss(animated: true)
+        else {
+            
+            
+            let amount = Double((amountTextField.text?.extractNumber())!)
+            let percent = Double((alcoholContentTF.text?.extractNumber())!) / 100
+            
+            let newDrink = Drink(timeConsumed: timePickerView.date, percent:percent, volume: Measurement(value: amount, unit: UnitVolume.fluidOunces), name: selectedDrink.name)
+            
+            currentUser.currentDrinks?.append(newDrink)
+            NotificationCenter.default.post(name: .kMyNotification, object: nil)
+            
+            self.dismiss(animated: true)
+        }
     }
     func setupBackgroundViews(viewtoChange view : UIView){
         //Add Corner Radius
@@ -177,11 +214,14 @@ extension UISegmentedControl {
 
 extension String {
 
-    func extractNumber() -> Int {
+    func extractNumber() -> Double {
         var intString = ""
         
         for char in self {
             if char.isNumber{
+                intString += String(char)
+            }
+            else if char == "." {
                 intString += String(char)
             }
             else{
@@ -189,43 +229,48 @@ extension String {
             }
         }
         
-        
-        return Int(intString) ?? 0
+        print(intString)
+        return Double(intString) ?? 0.0
     }
     // formatting text for currency textField
     func currencyInputFormatting() -> String {
         let formatter = NumberFormatter()
-        formatter.maximumIntegerDigits = 3
+        formatter.maximumIntegerDigits = 2
+        formatter.maximumFractionDigits = 1
         
        
-        
-        let numString: NSNumber = NSNumber(value:  self.extractNumber())
+        if let doubleValue = Double(self) {
+         
+            return formatter.string(from: NSNumber(value: doubleValue))! + "oz"
 
-        return (formatter.string(from: (numString)) ?? "") + "oz"
+        }
+        else {
+            return formatter.string(from: NSNumber(value: 0))! + "oz"
+        }
+        
+
 
         
     }
     func percentFormatter() -> String {
     
+        print(self)
+        
         let formatter = NumberFormatter()
+        formatter.numberStyle = .percent
         formatter.maximumIntegerDigits = 2
+        formatter.maximumFractionDigits = 1
         
-        
-        var intString = ""
-        
-        for char in self {
-            if char.isNumber{
-                intString += String(char)
-            }
-            else{
-                break
-            }
+     
+        if let doubleValue = Double(self) {
+         
+            return formatter.string(from: NSNumber(value: doubleValue/100))!
+
+        }
+        else {
+            return formatter.string(from: NSNumber(value: 0))!
         }
         
-        let numString: NSNumber = NSNumber(value: Int(intString) ?? 0)
-
-                
-        return (formatter.string(from: (numString)) ?? "") + "%"
 
         
     }

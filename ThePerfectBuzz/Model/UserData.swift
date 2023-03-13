@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 let key = "user_key"
 
@@ -73,13 +74,16 @@ struct Drink : Codable{
     var percent : Double
     var volume : Measurement<UnitVolume>
     var alcLevel : Double?
+    var name : String
     
-    init(timeConsumed: Date, percent: Double, volume: Measurement<UnitVolume>) {
+    init(timeConsumed: Date, percent: Double, volume: Measurement<UnitVolume>, name : String) {
         self.timeStarted = timeConsumed
         self.timeFinished = Date()
         self.percent = percent
         self.volume = volume
+        self.name = name
         self.alcLevel = calculateAlcLevel()
+
     }
     
     func calculateAlcLevel() -> Double {

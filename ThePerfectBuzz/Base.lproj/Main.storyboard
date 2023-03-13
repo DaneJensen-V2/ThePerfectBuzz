@@ -14,11 +14,11 @@
         <array key="Poppins-Bold.ttf">
             <string>Poppins-Bold</string>
         </array>
-        <array key="Poppins-Medium.ttf">
-            <string>Poppins-Medium</string>
-        </array>
         <array key="Poppins-Regular.ttf">
             <string>Poppins-Regular</string>
+        </array>
+        <array key="Poppins-SemiBold.ttf">
+            <string>Poppins-SemiBold</string>
         </array>
     </customFonts>
     <scenes>
@@ -82,8 +82,8 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Updates in" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="viN-wj-gu1">
-                                                        <rect key="frame" x="115.66666666666666" y="260" width="129" height="33.666666666666686"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drink again in" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="viN-wj-gu1">
+                                                        <rect key="frame" x="98.333333333333329" y="260" width="163.66666666666669" height="33.666666666666686"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="24"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -246,16 +246,44 @@
                                                     <constraint firstItem="ZBU-wD-jZZ" firstAttribute="top" secondItem="INc-56-ScZ" secondAttribute="top" constant="10" id="xmf-JX-ROC"/>
                                                 </constraints>
                                             </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOL-x4-vNO">
+                                                <rect key="frame" x="15" y="1005" width="360" height="226"/>
+                                                <subviews>
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="dBP-K9-WVR">
+                                                        <rect key="frame" x="10" y="50" width="340" height="166"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    </tableView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="dBP-K9-WVR" firstAttribute="leading" secondItem="TOL-x4-vNO" secondAttribute="leading" constant="10" id="DmW-EH-tsx"/>
+                                                    <constraint firstAttribute="bottom" secondItem="dBP-K9-WVR" secondAttribute="bottom" constant="10" id="GMd-kM-nZ1"/>
+                                                    <constraint firstItem="dBP-K9-WVR" firstAttribute="top" secondItem="TOL-x4-vNO" secondAttribute="top" constant="50" id="OhD-Mk-9wx"/>
+                                                    <constraint firstAttribute="trailing" secondItem="dBP-K9-WVR" secondAttribute="trailing" constant="10" id="ipr-v1-L8G"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Drinks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XXb-VA-Ayw">
+                                                <rect key="frame" x="90" y="1015.0000000000001" width="210" height="39.333333333333371"/>
+                                                <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="28"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" name="BG_Gray"/>
                                         <constraints>
                                             <constraint firstItem="hac-Wf-im2" firstAttribute="top" secondItem="vRb-k0-ycx" secondAttribute="top" constant="10" id="1Sm-c7-AQb"/>
                                             <constraint firstItem="INc-56-ScZ" firstAttribute="leading" secondItem="vRb-k0-ycx" secondAttribute="leading" constant="15" id="Dkz-IX-yau"/>
+                                            <constraint firstAttribute="trailing" secondItem="TOL-x4-vNO" secondAttribute="trailing" constant="15" id="Du4-Fz-R35"/>
                                             <constraint firstAttribute="trailing" secondItem="INc-56-ScZ" secondAttribute="trailing" constant="15" id="Emc-GD-2r6"/>
+                                            <constraint firstItem="TOL-x4-vNO" firstAttribute="top" secondItem="INc-56-ScZ" secondAttribute="bottom" constant="20" id="Fn5-Ul-MKh"/>
                                             <constraint firstAttribute="height" constant="1241" id="WSN-xA-oYW"/>
+                                            <constraint firstItem="TOL-x4-vNO" firstAttribute="leading" secondItem="vRb-k0-ycx" secondAttribute="leading" constant="15" id="Y7E-j0-Cz0"/>
                                             <constraint firstItem="hac-Wf-im2" firstAttribute="leading" secondItem="vRb-k0-ycx" secondAttribute="leading" constant="15" id="a9O-bM-lpA"/>
                                             <constraint firstAttribute="trailing" secondItem="hac-Wf-im2" secondAttribute="trailing" constant="15" id="dnS-6t-Vfp"/>
+                                            <constraint firstItem="XXb-VA-Ayw" firstAttribute="centerX" secondItem="vRb-k0-ycx" secondAttribute="centerX" id="fDX-7Z-LAV"/>
                                             <constraint firstItem="INc-56-ScZ" firstAttribute="top" secondItem="hac-Wf-im2" secondAttribute="bottom" constant="25" id="kzA-hk-dFc"/>
+                                            <constraint firstAttribute="bottom" secondItem="TOL-x4-vNO" secondAttribute="bottom" constant="10" id="m7Q-hP-Tve"/>
+                                            <constraint firstItem="XXb-VA-Ayw" firstAttribute="top" secondItem="INc-56-ScZ" secondAttribute="bottom" constant="30" id="ztl-QH-Fll"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -288,6 +316,8 @@
                     <connections>
                         <outlet property="BACLabel" destination="xgS-tg-NHa" id="Ozv-kf-dGR"/>
                         <outlet property="addDrinkBGView" destination="INc-56-ScZ" id="WiT-sl-PkW"/>
+                        <outlet property="currentDrinksTable" destination="dBP-K9-WVR" id="ev8-uP-taP"/>
+                        <outlet property="currentDrinksView" destination="TOL-x4-vNO" id="riG-17-mB5"/>
                         <outlet property="drinkCollection" destination="3BQ-H5-Pje" id="P4j-sO-oO2"/>
                         <outlet property="infoLabel" destination="3UX-Md-dc1" id="Lkc-Sv-c9b"/>
                         <outlet property="orangeProgress" destination="ayL-wx-NnA" id="EvH-kC-Elm"/>
@@ -295,6 +325,8 @@
                         <outlet property="pointerView" destination="ejE-WJ-mRf" id="yYZ-NL-ghm"/>
                         <outlet property="redProgress" destination="9aF-7I-XPu" id="VKF-ci-6Vz"/>
                         <outlet property="topBGView" destination="hac-Wf-im2" id="QJI-Mr-Lw8"/>
+                        <outlet property="view" destination="8bC-Xf-vdC" id="2Kh-04-moa"/>
+                        <outlet property="viewHeight" destination="WSN-xA-oYW" id="PAu-Ga-1eV"/>
                         <segue destination="uIQ-29-0L3" kind="presentation" identifier="DrinkFocus" id="GhU-Wh-FnT"/>
                     </connections>
                 </viewController>
@@ -335,9 +367,9 @@
                                     <segmentedControl opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="c42-cO-IvL">
                                         <rect key="frame" x="117" y="10" width="233" height="82"/>
                                         <segments>
-                                            <segment title="" image="WineGlass"/>
-                                            <segment title="" image="WineGlasses"/>
-                                            <segment title="" image="WineBottle"/>
+                                            <segment title="" image="WineSmall"/>
+                                            <segment title="" image="WineMedium"/>
+                                            <segment title="" image="WineLarge"/>
                                         </segments>
                                         <connections>
                                             <action selector="amountSegment:" destination="uIQ-29-0L3" eventType="valueChanged" id="oKy-QB-1gs"/>
@@ -349,9 +381,10 @@
                                             <constraint firstAttribute="width" constant="97" id="C9B-0j-AgI"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="34"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                         <connections>
-                                            <action selector="amountChanged:" destination="uIQ-29-0L3" eventType="editingChanged" id="B9f-UZ-4HJ"/>
+                                            <action selector="amountEditBegin:" destination="uIQ-29-0L3" eventType="editingDidEnd" id="UCh-PM-jmy"/>
+                                            <action selector="amountEditEnd:" destination="uIQ-29-0L3" eventType="editingDidEnd" id="MsA-3j-YOV"/>
                                             <action selector="editingStartAmount:" destination="uIQ-29-0L3" eventType="editingDidBegin" id="Gr4-xa-sRh"/>
                                         </connections>
                                     </textField>
@@ -360,19 +393,19 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3OX-g9-b9T">
                                                 <rect key="frame" x="0.0" y="0.0" width="77.666666666666671" height="25"/>
-                                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
+                                                <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BH3-f8-vtN">
                                                 <rect key="frame" x="77.666666666666657" y="0.0" width="77.666666666666657" height="25"/>
-                                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
+                                                <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRG-Gz-ZWw">
                                                 <rect key="frame" x="155.33333333333331" y="0.0" width="77.666666666666686" height="25"/>
-                                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
+                                                <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -421,10 +454,10 @@
                                             <constraint firstAttribute="width" constant="97" id="aMj-kb-ihs"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="34"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
                                         <connections>
-                                            <action selector="percentChanged:" destination="uIQ-29-0L3" eventType="editingChanged" id="Nan-2P-rQe"/>
-                                            <action selector="percentEditBegin:" destination="uIQ-29-0L3" eventType="editingDidBegin" id="ubN-P0-JCn"/>
+                                            <action selector="alcPercentEnded:" destination="uIQ-29-0L3" eventType="editingDidEnd" id="Xak-As-keJ"/>
+                                            <action selector="percentBeginEditing:" destination="uIQ-29-0L3" eventType="editingDidBegin" id="DI0-hb-saE"/>
                                         </connections>
                                     </textField>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yg7-d3-rEg">
@@ -434,6 +467,9 @@
                                             <segment title="15%"/>
                                             <segment title="20%"/>
                                         </segments>
+                                        <connections>
+                                            <action selector="alcPercentChanged:" destination="uIQ-29-0L3" eventType="valueChanged" id="BIg-OY-Q8G"/>
+                                        </connections>
                                     </segmentedControl>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -530,6 +566,9 @@
                         <outlet property="alcoholContentSegment" destination="yg7-d3-rEg" id="ZeV-AG-aE8"/>
                         <outlet property="alcoholContentTF" destination="Iqy-YN-N8o" id="1v8-V0-xSg"/>
                         <outlet property="alcoholContentView" destination="x1y-sK-jAp" id="s7a-bh-f5k"/>
+                        <outlet property="amountLabel1" destination="3OX-g9-b9T" id="y8c-oQ-naK"/>
+                        <outlet property="amountLabel2" destination="BH3-f8-vtN" id="y8Z-Bp-pBO"/>
+                        <outlet property="amountLabel3" destination="bRG-Gz-ZWw" id="UuZ-Ta-koQ"/>
                         <outlet property="amountSegment" destination="c42-cO-IvL" id="SpH-MS-pdc"/>
                         <outlet property="amountTextField" destination="LF3-UB-T6g" id="ltL-Th-VqZ"/>
                         <outlet property="drinkImage" destination="tQS-CA-kup" id="Hnh-M1-7G3"/>
@@ -563,9 +602,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="WineBottle" width="512" height="512"/>
-        <image name="WineGlass" width="511.99899291992188" height="511.99899291992188"/>
-        <image name="WineGlasses" width="512" height="512"/>
+        <image name="WineLarge" width="512" height="512"/>
+        <image name="WineMedium" width="512" height="512"/>
+        <image name="WineSmall" width="511.99899291992188" height="511.99899291992188"/>
         <image name="beer_logo" width="512" height="512"/>
         <image name="circle" catalog="system" width="128" height="123"/>
         <image name="gearshape.fill" catalog="system" width="128" height="123"/>

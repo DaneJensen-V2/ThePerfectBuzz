@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A53446F5298A3548003F7AB0 /* DrinkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53446F3298A3548003F7AB0 /* DrinkTableViewCell.swift */; };
+		A53446F6298A3548003F7AB0 /* DrinkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A53446F4298A3548003F7AB0 /* DrinkTableViewCell.xib */; };
 		A5C10C732980784300D0488C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C10C722980784300D0488C /* AppDelegate.swift */; };
 		A5C10C752980784300D0488C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C10C742980784300D0488C /* SceneDelegate.swift */; };
 		A5C10C772980784300D0488C /* HomePageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C10C762980784300D0488C /* HomePageVC.swift */; };
@@ -42,6 +44,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A53446F3298A3548003F7AB0 /* DrinkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkTableViewCell.swift; sourceTree = "<group>"; };
+		A53446F4298A3548003F7AB0 /* DrinkTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DrinkTableViewCell.xib; sourceTree = "<group>"; };
 		A5C10C6F2980784300D0488C /* The Perfect Buzz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Perfect Buzz.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5C10C722980784300D0488C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5C10C742980784300D0488C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -140,6 +144,8 @@
 		A5C10C872980789800D0488C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A53446F3298A3548003F7AB0 /* DrinkTableViewCell.swift */,
+				A53446F4298A3548003F7AB0 /* DrinkTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -256,6 +262,7 @@
 				A5C10CA22981F95800D0488C /* Poppins-LightItalic.ttf in Resources */,
 				A5C10CA52981F95800D0488C /* Poppins-ThinItalic.ttf in Resources */,
 				A5C10CA42981F95800D0488C /* Poppins-Thin.ttf in Resources */,
+				A53446F6298A3548003F7AB0 /* DrinkTableViewCell.xib in Resources */,
 				A5C10C9D2981F95800D0488C /* Poppins-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,6 +277,7 @@
 				A5C10CB3298222D100D0488C /* DrinkCollectionViewCell.swift in Sources */,
 				A5C10C772980784300D0488C /* HomePageVC.swift in Sources */,
 				A5C10CBE2984DA5100D0488C /* UserTransformer.swift in Sources */,
+				A53446F5298A3548003F7AB0 /* DrinkTableViewCell.swift in Sources */,
 				A5C10CB729837F0700D0488C /* UserData.swift in Sources */,
 				A5C10CBC2984D95700D0488C /* CoreDataStack.swift in Sources */,
 				A5C10C732980784300D0488C /* AppDelegate.swift in Sources */,
