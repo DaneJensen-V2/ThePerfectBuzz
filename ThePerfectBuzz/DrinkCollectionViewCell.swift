@@ -19,5 +19,15 @@ class DrinkCollectionViewCell: UICollectionViewCell {
         
         bgView.layer.cornerRadius = 10
         
+        backgroundColor = .clear // very important
+        layer.masksToBounds = false
+        layer.shadowOpacity = 0.23
+        layer.shadowRadius = 4
+        layer.shadowOffset = CGSize(width: 0, height: 0)
+        layer.shadowColor = UIColor.black.cgColor
+
+        // add corner radius on `contentView`
+        contentView.backgroundColor = .white
+        contentView.layer.cornerRadius = 10
     }
 }

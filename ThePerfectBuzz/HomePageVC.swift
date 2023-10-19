@@ -55,7 +55,7 @@ class HomePageVC : UIViewController {
             currentUser.BAC = self.calculateBAC()
             print("Updating UI...")
         }
-        
+
         viewHeight.constant = 1500
     
         NotificationCenter.default.addObserver(self, selector: #selector(handleMyNotification(_:)), name: .kMyNotification, object: nil)
@@ -78,7 +78,8 @@ class HomePageVC : UIViewController {
         currentDrinksTable.register(UINib(nibName: "DrinkTableViewCell", bundle: nil), forCellReuseIdentifier: "DrinkCell")
         
         currentUser.BAC = calculateBAC()
-
+        print(currentUser.currentDrinks)
+        print("test")
         updateUI()
        /*
       

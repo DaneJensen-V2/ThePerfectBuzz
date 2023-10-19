@@ -10,7 +10,7 @@ import UIKit
 
 let key = "user_key"
 
-var currentUser = User(height: Measurement(value: 70, unit: UnitLength.inches), weight: Measurement(value: 180, unit: UnitMass.pounds), gender: .Male, DrinkingFrequency: 0.017, BAC: 0.0, currentDrinks: [])
+var currentUser = User(height: Measurement(value: 70, unit: UnitLength.inches), weight: Measurement(value: 185, unit: UnitMass.pounds), gender: .Male, DrinkingFrequency: 0.017, BAC: 0.0, currentDrinks: [])
 
    struct User : Codable {
     var height : Measurement<UnitLength>
